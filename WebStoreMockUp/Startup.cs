@@ -39,6 +39,7 @@ namespace WebStoreMockUp
             });
 
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebStoreMockUp", Version = "v1" });
@@ -58,6 +59,8 @@ namespace WebStoreMockUp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthorization();
 
